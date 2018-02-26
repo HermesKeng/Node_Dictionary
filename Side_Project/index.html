@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dictionary</title>
+    <style>
+      table,th,td{
+        border: 1px solid black;
+        border-collapse: collapse;
+
+      }
+      table{
+        margin: 30px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Logan Dictionary</h1>
+
+    <form method="post" action="/">
+      <p>Word</p><input type="text" name="eng">
+      <p>Defination</p><input type="text" name="def">
+      <input type="submit" value="Submit">
+    </form>
+    <form method="Delete" action="/">
+      <p>Delete Item</p>
+      <p>  Item No :<input type="text" name="no">
+      <input type="submit" value="Delete"></p>
+    </form>
+    <table style="width:100%">
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Defination</th>
+          <th>Picture</th>
+        </tr>
+      </thead>
+
+    </table>
+  </body>
+</html>
