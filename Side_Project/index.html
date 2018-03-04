@@ -1,40 +1,101 @@
-<!DOCTYPE html>
 <html>
   <head>
     <title>Dictionary</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <style>
-      table,th,td{
-        border: 1px solid black;
-        border-collapse: collapse;
-
+      .row{
+        margin-top:1em;
       }
-      table{
-        margin: 30px auto;
+      #title{
+        color: #000000;
+        margin: auto;
+        padding: 0 2em 0 2em;
+      }
+      .active .collapsible-header{
+        background-color: #3949ab;
+        color:white;
+      }
+      .collapsible{
+        font-size: 1.5em;
+      }
+      .brand-logo{
+        font-size: 2em;
       }
     </style>
   </head>
   <body>
-    <h1>Logan Dictionary</h1>
-
-    <form method="post" action="/">
-      <p>Word</p><input type="text" name="eng">
-      <p>Defination</p><input type="text" name="def">
-      <input type="submit" value="Submit">
-    </form>
-    <form method="Delete" action="/">
-      <p>Delete Item</p>
-      <p>  Item No :<input type="text" name="no">
-      <input type="submit" value="Delete"></p>
-    </form>
-    <table style="width:100%">
-      <thead>
-        <tr>
-          <th>Word</th>
-          <th>Defination</th>
-          <th>Picture</th>
-        </tr>
-      </thead>
-
-    </table>
+    <div>
+      <nav>
+        <div class="nav-wrapper amber lighten-2" >
+          <a href="#" class="brand-logo" id="title">Dictionary</a>
+        </div>
+      </nav>
+    <div class="row">
+        <div class="col s12 m4 l3">
+          <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header">Create</div>
+              <div class="collapsible-body">
+                <form method="post" action="/">
+                  <p>Word</p><input type="text" name="eng">
+                  <p>Defination</p><input type="text" name="def">
+                  <p>Link</p><input type="text" name="picture_link">
+                  <input class="btn" type="submit" value="Submit">
+                </form>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Delete</div>
+              <div class="collapsible-body">
+                <p>  Word :<input id="deleteNo" type="text" name="word">
+                <input class="btn" id="submit" type="submit" value="Delete"></p>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Edit</div>
+              <div class="collapsible-body">
+                <form method="post" action="/update">
+                  <p>Edit Word</p><input type="text" name="edit_word">
+                  <p>Edit Defination</p><input type="text" name="edit_def">
+                  <p>Edit Link</p><input type="text" name="edit_link">
+                  <input class="btn" type="submit" value="Submit">
+                </form>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col s12 m8 l9">
+          <table class="centered highlight bordered z-depth-2"style="width:100%">
+            <thead>
+              <tr>
+                <th>Word</th>
+                <th>Defination</th>
+                <th>Picture</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+    </div>
+  </div>
   </body>
 </html>
+<script>
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+    $("#submit").click(function(){
+        var no = $("#deleteNo").val();
+        $.ajax({
+          url: '/',
+          type: 'DELETE',
+          data:{word:String(no)},
+          success: function(result) {
+            location.reload();
+          }
+        })
+    });
+  });
+</script>
